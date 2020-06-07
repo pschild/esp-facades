@@ -1,0 +1,13 @@
+{
+  "name": "MyLib",
+  "description": "My test library",
+  "keywords": "keyword1,keyword2",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pschild/esp-lib-example.git"
+  },
+  "dependencies": {
+    "PubSubClient": "^2.8"
+  }
+}
