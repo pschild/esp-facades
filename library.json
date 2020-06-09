@@ -8,7 +8,6 @@
     "url": "https://github.com/pschild/esp-lib-example.git"
   },
   "dependencies": {
-    "PubSubClient": "^2.8",
-    "NTPClient": "3.0.0"
+    "PubSubClient": "^2.8"
   }
 }
