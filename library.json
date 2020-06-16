@@ -1,11 +1,11 @@
 {
-  "name": "MyLib",
+  "name": "ESPFacades",
   "description": "My test library",
   "keywords": "keyword1,keyword2",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pschild/esp-lib-example.git"
+    "url": "<your actual .git link here>"
   },
   "dependencies": {
     "PubSubClient": "^2.8"
