@@ -16,6 +16,7 @@ class MqttHandler {
     void setOnConnectedCallback(std::function<void()> callback);
     boolean subscribe(const char* topic, std::function<void(char* payload)> cb);
     boolean unsubscribe(const char* topic);
+    boolean publish(const char* topic, const char* payload);
   private:
     char* _brokerIP;
     String _clientName;
