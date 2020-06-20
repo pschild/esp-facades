@@ -79,5 +79,9 @@ boolean MqttHandler::unsubscribe(const char* topic) {
   return _mqttClient->unsubscribe(topic);
 }
 
+boolean MqttHandler::publish(const char* topic, const char* payload) {
+  return _mqttClient->publish(topic, payload);
+}
+
 // You must add a definition after class, see https://stackoverflow.com/a/14331502/5276055
 std::map<std::string, std::function<void(char* payload)>> MqttHandler::_callbackMap;
