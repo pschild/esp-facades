@@ -6,13 +6,13 @@
 
 class WifiHandler {
   public:
-    WifiHandler(char* ssid, char* password);
+    WifiHandler(String ssid, String password);
     void setup();
     void loop();
     void connect();
   private:
-    char* _ssid;
-    char* _password;
+    String _ssid;
+    String _password;
 };
 
 #endif
