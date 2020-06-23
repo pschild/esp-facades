@@ -20,8 +20,12 @@ void OTAUpdateHandler::loop() {
 }
 
 void OTAUpdateHandler::startUpdate() {
+  unsigned long now = millis();
+
   ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
   ESPhttpUpdate.update(buildEnpointUrl(), _version);
+
+  _lastUpdateCheck = now;
 }
 
 void OTAUpdateHandler::checkForUpdate() {
@@ -31,7 +35,6 @@ void OTAUpdateHandler::checkForUpdate() {
     && now >= _lastUpdateCheck + _updateInterval
   ) {
     startUpdate();
-    _lastUpdateCheck = now;
   }
 }
 
