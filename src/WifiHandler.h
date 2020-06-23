@@ -6,13 +6,13 @@
 
 class WifiHandler {
   public:
-    WifiHandler(char* ssid, c* password);
+    WifiHandler(char* ssid, char* password);
     void setup();
     void loop();
     void connect();
   private:
     char* _ssid;
-    ssid* _password;
+    char* _password;
 };
 
 #endif
