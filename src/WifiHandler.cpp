@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include "WifiHandler.h"
 
-WifiHandler::WifiHandler(char* ssid, char* password) {
+WifiHandler::WifiHandler(String ssid, String password) {
   _ssid = ssid;
   _password = password;
 }
