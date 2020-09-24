@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
-#include <map>
 
 class MqttHandler {
   public:
@@ -12,9 +11,9 @@ class MqttHandler {
     void setup();
     void loop();
     void reconnect();
-    static void callback(char* topic, byte* payload, unsigned int length);
     void setOnConnectedCallback(std::function<void()> callback);
-    boolean subscribe(const char* topic, std::function<void(char* payload)> cb);
+    void setOnMessageCallback(std::function<void(char* topic, char* message)> callback);
+    boolean subscribe(const char* topic);
     boolean unsubscribe(const char* topic);
     boolean publish(const char* topic, const char* payload);
   private:
@@ -23,7 +22,6 @@ class MqttHandler {
     WiFiClient* _wifiClient;
     PubSubClient* _mqttClient;
     std::function<void()> _connectedCallback;
-    static std::map<std::string, std::function<void(char* payload)>> _callbackMap;
 };
 
 #endif

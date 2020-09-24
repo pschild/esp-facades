@@ -1,7 +1,6 @@
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
 #include "MqttHandler.h"
-#include <map>
 
 MqttHandler::MqttHandler(char* brokerIP, String clientName) {
   _brokerIP = brokerIP;
@@ -13,7 +12,6 @@ void MqttHandler::setup() {
   if (_wifiClient->status() != WL_CONNECTED) {
     _mqttClient = new PubSubClient(*_wifiClient);
     _mqttClient->setServer(_brokerIP, 1883);
-    _mqttClient->setCallback(MqttHandler::callback);
   } else {
     throw "Error: Cannot connect to PubSubClient as Wifi is not connected!";
   }
@@ -45,43 +43,39 @@ void MqttHandler::reconnect() {
   }
 }
 
-void MqttHandler::callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Received message [");
-  Serial.print(topic);
-  Serial.print("] ");
-  char msg[length+1];
-  for (unsigned int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-    msg[i] = (char)payload[i];
-  }
-  Serial.println();
-
-  msg[length] = '\0';
-  Serial.println(msg);
-  
-  if (_callbackMap[topic]) {
-    _callbackMap[topic](msg);
-  }
-
-}
-
 void MqttHandler::setOnConnectedCallback(std::function<void()> callback) {
   _connectedCallback = callback;
 }
 
-boolean MqttHandler::subscribe(const char* topic, std::function<void(char* payload)> cbFunc) {
-  _callbackMap[topic] = cbFunc;
+void MqttHandler::setOnMessageCallback(std::function<void(char* topic, char* message)> callback) {
+  // _mqttClient->setCallback(callback);
+  _mqttClient->setCallback([&callback](char* topic, byte* payload, unsigned int length) {
+    Serial.println("internal callback:");
+    Serial.print("Received message [");
+    Serial.print(topic);
+    Serial.print("] ");
+    char msg[length+1];
+    for (unsigned int i = 0; i < length; i++) {
+      Serial.print((char)payload[i]);
+      msg[i] = (char)payload[i];
+    }
+    Serial.println();
+
+    msg[length] = '\0';
+    Serial.println(msg);
+
+    callback(topic, msg);
+  });
+}
+
+boolean MqttHandler::subscribe(const char* topic) {
   return _mqttClient->subscribe(topic);
 }
 
 boolean MqttHandler::unsubscribe(const char* topic) {
-  _callbackMap.erase(topic);
   return _mqttClient->unsubscribe(topic);
 }
 
 boolean MqttHandler::publish(const char* topic, const char* payload) {
   return _mqttClient->publish(topic, payload);
 }
-
-// You must add a definition after class, see https://stackoverflow.com/a/14331502/5276055
-std::map<std::string, std::function<void(char* payload)>> MqttHandler::_callbackMap;
