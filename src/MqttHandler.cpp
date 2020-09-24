@@ -48,9 +48,7 @@ void MqttHandler::setOnConnectedCallback(std::function<void()> callback) {
 }
 
 void MqttHandler::setOnMessageCallback(std::function<void(char* topic, char* message)> callback) {
-  // _mqttClient->setCallback(callback);
-  _mqttClient->setCallback([&callback](char* topic, byte* payload, unsigned int length) {
-    Serial.println("internal callback:");
+  _mqttClient->setCallback([callback](char* topic, byte* payload, unsigned int length) {
     Serial.print("Received message [");
     Serial.print(topic);
     Serial.print("] ");
