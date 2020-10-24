@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "PubSubClient": "^2.8",
-    "ESP8266httpUpdate": "^1.3"
+    "ESP8266httpUpdate": "^1.3",
+    "ESP8266HTTPClient": "^1.2"
   }
 }
