@@ -1,11 +1,11 @@
 {
   "name": "ESPFacades",
-  "description": "My test library",
-  "keywords": "keyword1,keyword2",
+  "description": "Facades and utility functions for ESP8266",
+  "keywords": "facade,utility,esp,esp8266,ota,mqtt,wifi",
   "version": "1.3.1",
   "repository": {
     "type": "git",
-    "url": "<your actual .git link here>"
+    "url": "https://github.com/pschild/esp-facades"
   },
   "dependencies": {
     "PubSubClient": "^2.8",
