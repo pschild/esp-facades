@@ -16,8 +16,8 @@ class OTAUpdateHandler {
   private:
     String _updateServerIP;
     String _version;
-    long _updateInterval;
-    long _lastUpdateCheck;
+    unsigned long _updateInterval;
+    unsigned long _lastUpdateCheck;
     String buildEnpointUrl();
 };
 

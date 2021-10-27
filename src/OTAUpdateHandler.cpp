@@ -22,8 +22,9 @@ void OTAUpdateHandler::loop() {
 void OTAUpdateHandler::startUpdate() {
   unsigned long now = millis();
 
+  WiFiClient client;
   ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
-  ESPhttpUpdate.update(buildEnpointUrl(), _version);
+  ESPhttpUpdate.update(client, buildEnpointUrl(), _version);
 
   _lastUpdateCheck = now;
 }
