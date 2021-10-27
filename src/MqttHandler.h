@@ -7,7 +7,7 @@
 
 class MqttHandler {
   public:
-    MqttHandler(char* brokerIP, String clientName);
+    MqttHandler(char* brokerIP, const String clientName);
     void setup();
     void loop();
     void reconnect();
