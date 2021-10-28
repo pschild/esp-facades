@@ -2,7 +2,7 @@
 #include <ESP8266WiFi.h>
 #include "MqttHandler.h"
 
-MqttHandler::MqttHandler(char* brokerIP, String clientName) {
+MqttHandler::MqttHandler(const char* brokerIP, String clientName) {
   _brokerIP = brokerIP;
   _clientName = clientName;
   _wifiClient = new WiFiClient();

@@ -7,7 +7,7 @@
 
 class MqttHandler {
   public:
-    MqttHandler(char* brokerIP, String clientName);
+    MqttHandler(const char* brokerIP, String clientName);
     void setup();
     void loop();
     void reconnect();
@@ -17,7 +17,7 @@ class MqttHandler {
     boolean unsubscribe(const char* topic);
     boolean publish(const char* topic, const char* payload);
   private:
-    char* _brokerIP;
+    const char* _brokerIP;
     String _clientName;
     WiFiClient* _wifiClient;
     PubSubClient* _mqttClient;
